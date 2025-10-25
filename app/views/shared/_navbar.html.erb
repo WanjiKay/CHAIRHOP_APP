@@ -1,38 +1,67 @@
 <nav class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "logo.png" %>
-    <% end %>
+  <div class="container-fluid header-display-desktop" data-content-field="site-title">
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <!-- Logo / Site title -->
+    <div class="header-title-nav-wrapper">
+      <div class="header-title" data-animation-role="header-element">
+        <div class="header-title-text">
+          <%= link_to root_path, id: "site-title", data: { animation_role: "header-element" } do %>
+            <%= image_tag "logo.png", alt: "ChairHop Logo", class: "navbar-logo" %>
+          <% end %>
+        </div>
+      </div>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "Messages", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item dropdown">
-          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-          </a>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+      <!-- Navigation links -->
+      <div class="header-nav">
+        <div class="header-nav-wrapper">
+          <nav class="header-nav-list">
+            <div class="header-nav-item header-nav-item--collection">
+
+            <div class="header-nav-item header-nav-item--collection">
+
             </div>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
-        <% end %>
-      </ul>
+            <div class="header-nav-item header-nav-item--collection">
+
+            </div>
+          </nav>
+        </div>
+      </div>
     </div>
+
+    <!-- Right-side actions -->
+    <div class="header-actions header-actions--right">
+      <% if user_signed_in? %>
+        <div class="dropdown header-actions-action">
+          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= image_tag current_user.avatar_url || "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "User menu" %>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <%= link_to "Profile", profile_path, class: "dropdown-item" %>
+            <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" %>
+            <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
+          </div>
+        </div>
+      <% else %>
+        <div class="header-actions-action header-actions-action--cta" data-animation-role="header-element">
+          <%= link_to "Login", new_user_session_path, class: "btn btn--border theme-btn--primary-inverse" %>
+        </div>
+      <% end %>
+
+      <div class="header-actions-action header-actions-action--cta" data-animation-role="header-element">
+      </div>
+    </div>
+
+
   </div>
 </nav>
+
+<style>
+  .top-bun, .patty, .bottom-bun {
+    height: 1px;
+  }
+
+  .navbar-logo {
+    height: 40px;
+    width: auto;
+  }
+</style>
