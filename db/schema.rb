@@ -15,11 +15,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_25_213313) do
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
+    t.datetime "time", null: false
+    t.string "location", null: false
+    t.boolean "booked", default: false
     t.text "content"
-    t.string "location"
-    t.string "booking_status"
-    t.integer "time"
-    t.date "date"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
