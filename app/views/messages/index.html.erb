@@ -1,0 +1,8 @@
+<h1><%= @chat.name %></h1>
+
+<% @chat.messages.each do |message| %>
+  <p>
+    <strong><%= message.role %></strong>
+    <%= raw(render_markdown(message.content)) %>
+  </p>
+<% end %>
