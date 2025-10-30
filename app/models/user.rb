@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :appointments, dependent: :nullify
   has_many :chats
+  has_one_attached :avatar
 end
