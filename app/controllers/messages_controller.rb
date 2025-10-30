@@ -1,18 +1,16 @@
 SYSTEM_PROMPT = "You are an assitant for an booking application. n/n/ The task is to help answer the questions of the customers."
 class MessagesController < ApplicationController
+  before_action :set_chat
 
   def index
-    @chat = Chat.find(params[:chat_id])
     @message = @chat.messages
   end
 
   def new
-    @chat = Chat.find(params[:chat_id])
     @message = Message.new
   end
 
   def create
-    @chat = Chat.find(params[:chat_id])
     @message = Message.new(role: "user", content: params[:message][:content], chat:@chat)
     if @message.save
      @ruby_llm_chat = RubyLLM.chat
@@ -25,12 +23,20 @@ class MessagesController < ApplicationController
 
   private
 
-def chat_context
-  "Here is the context of the chat: #{@chat.content}."
-end
+  def set_chat
+    @chat = Chat.find(params[:chat_id])
+  end
 
-def instructions
+  def message_params
+    params.require(:message).permit(:content, photos: [])
+  end
+
+  def chat_context
+  "Here is the context of the chat: #{@chat.content}."
+  end
+
+  def instructions
   [SYSTEM_PROMPT, challenge_context, @challenge.system_prompt]
   .compact.join("\n\n")
-end
+  end
 end
