@@ -1,6 +1,6 @@
 <h1><%= @chat.name %></h1>
 
-<div class= chat-messages">
+<div class= "chat-messages">
 <% @chat.messages.each do |message| %>
   <p>
     <strong><%= message.role %></strong>
@@ -9,7 +9,7 @@
 <% end %>
 
 <% if message.photos.attached? %>
-<% @chat.photos.each do |photo| %>
+<% message.photos.each do |photo| %>
 <p>
 <%= cl_image_tag @message.photo.key, height: 300, width: 400, crop: :fill %>
 </p>
