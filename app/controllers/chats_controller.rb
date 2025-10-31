@@ -7,7 +7,7 @@ class ChatsController < ApplicationController
 
   def show
     @chat = Chat.find(params[:id])
-    unless @chat.users.include?(current_user)
+    unless @chat.user == current_user
       redirect_to chats_path, alert: "You are not authorized to view this chat."
       return
     end
@@ -17,6 +17,8 @@ class ChatsController < ApplicationController
 
   def create
     @chat = Chat.new(chat_params)
+    @chat.user = current_user
+    @chat.appointment = Appointment.first
     if @chat.save
       redirect_to @chat
     else
@@ -32,6 +34,6 @@ class ChatsController < ApplicationController
   private
 
   def chat_params
-    params.require(:chat).permit(:name)
+    params.require(:chat).permit(:title)
   end
 end
