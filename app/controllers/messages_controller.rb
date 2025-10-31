@@ -3,6 +3,7 @@ class MessagesController < ApplicationController
   before_action :set_chat
 
   def index
+    @chat = Chat.find(params[:chat_id])
     @messages = @chat.messages
   end
 
@@ -24,20 +25,15 @@ class MessagesController < ApplicationController
 
   private
 
-  def set_chat
-    @chat = Chat.find(params[:chat_id])
-  end
-
-  def message_params
-    params.require(:message).permit(:content, photos: [])
-  end
-
-  def chat_context
-  "Here is the context of the chat: #{@chat.content}."
+  def appointment_context
+    appointment = @chat.appointment
+    "Here is the context of the appointment: #{appointment.content}, #{appointment.time}, #{appointment.location}."
   end
 
   def instructions
-  [SYSTEM_PROMPT, chat_context]
-  .compact.join("\n\n")
+    [SYSTEM_PROMPT, appointment_context]
+    .compact.join("\n\n")
   end
 end
+
+user= User.create!(email: "client@example.com", password: "password")
