@@ -1,1 +1,124 @@
 // Specific CSS for your home-page
+
+// Container Layout
+.container-wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+  padding: 1rem;
+}
+
+.side-by-side{
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+
+  >div{
+    flex: 1 1 45%;
+    min-width: 280px;
+  }
+}
+
+//Text Style
+.text-center{
+  text-align: center;
+  margin-bottom: 1.5rem;
+
+  h1{
+    color: $primary;
+    font-weight: 700;
+  }
+
+  h2,h3{
+    color: $primary;
+    font-weight: 600;
+  }
+
+  p{
+    color: $dark;
+  }
+
+  a{
+    color: $primary;
+    font-weight: 600;
+
+    &:hover{
+      color: $secondary;
+      text-decoration: underline;
+    }
+  }
+}
+
+// Searchbar
+.search-bar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100;
+  max-width: 700px;
+}
+
+.input.form-control{
+  border-radius: $border-radius-xxl;
+  padding: 0.6rem 1rem;
+}
+
+.btn{
+  border-radius: $border-radius-xxl
+}
+
+//Appointments
+.section-title{
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  color: $primary;
+}
+
+.list-group{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .appointment-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid $color-soft-gray;
+    padding: 1rem;
+    background-color: $color-cream;
+    transition: transform 0,2s ease, background 0.3s ease;
+
+    &:hover{
+      transform: scale(1.02);
+      background-color: lighten($light, 3%);
+    }
+
+    strong{
+      color: $primary;
+    }
+
+    small{
+      color: $secondary;
+    }
+  }
+}
+
+// Adjusted Response
+@media{
+  .container-wrapper,
+  .side-by-side{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-bar form{
+    flex-direction: column;
+    gap: 0.75rem
+  }
+}
