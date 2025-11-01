@@ -1,0 +1,29 @@
+<%= link_to "← Back", chats_path %> /
+<%= link_to "Appointment", appointment_path(@chat.appointment) %>
+
+<h1><%= @chat.title %></h1>
+
+<div class= "chat-messages">
+  <% @chat.messages.each do |message| %>
+    <p>
+      <strong><%= message.role %></strong>
+      <%= raw(render_markdown(message.content)) %>
+    </p>
+
+    <% if message.photos.attached? %>
+      <% message.photos.each do |photo| %>
+      <p>
+        <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+      </p>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="container">
+<%=simple_form_for [@chat, @message] do |f| %>
+<%= f.input :content, placeholder: "Hops at your service", required: true%>
+<%= f.input :photos, as: :file, input_html: { multiple:true } %>
+<%= f.button :submit, 'Ask HOPPS', class: "btn btn-primary" %>
+<% end %>
+</div>
