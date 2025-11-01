@@ -1,9 +1,47 @@
-<h1>Chair Hop</h1>
-<p>Our chair is always open</p>
-
+<div class="text-center">
+  <h1>Chair Hop</h1>
+  <p>Our chair is always open</p>
 
 <% if user_signed_in? %>
-  You are signed in as <%= current_user.email %>.
+  <p class="text-mited">Welcome back, <%= current_user %>! </p>
 <% else %>
-  You are not signed in!
+  <p class="text-muted">Welcome! <%= link_to "Log in", new_user_session_path %> or
+  <%= link_to "Sign up", new_user_registration_path %> to book a chair. </p>
 <% end %>
+</div>
+
+<div class="search-bar my-4">
+  <%= form_with url: appointments_path, method: :get, local: true, class: "d-flex justify-content-center" do |form| %>
+    <%= form.text_field :search, placeholder: "Search for a stylist, time, or location", class: "form-controle w-50 me-2" %>
+    <%= form.submit "Search", class: "btn custom-btn" %>
+  <% end %>
+</div>
+
+<hr>
+
+<h2 class="text-center mb-3 section-title">Available Appointments (Next 4 hours)</h2>
+
+
+<% if @upcoming_appointments.any? %>
+  <div class="list-group">
+    <% @upcoming_appointments.each do |appointment| %>
+      <div class="list-group-item d-flex justify-content-between align-items-center appointment-item">
+        <div>
+          <strong><%= appointment.content %></strong><br>
+          <small><%= appointment.time.strftime("%I:%M %p") %> with <%= appointment.stylist_Name%></small>
+        </div>
+
+        <div>
+          <% if user_signed_in? %>
+            <%= link_to "Book Now", appointment_path(appointment), class: "btn btn-sm custom-btn" %>
+          <% else %>
+            <%= link_to "Login to Book", new_user_session_path, class: "btn btn-sm custom-btn" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-center text-mited mt-4">There are no seats available for the next 4 hours.</p>
+<% end %>
+</div>

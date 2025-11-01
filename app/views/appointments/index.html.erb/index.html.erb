@@ -1,0 +1,28 @@
+<div class="container my-5" >
+  <h1 class="text-center mb-4">Upcoming Appointments</h1>
+
+  <hr>
+
+<% if @upcoming_appointments.any? %>
+  <div class="list-group">
+    <% @upcoming_appointments.each do |appointment| %>
+      <div class="list-group-item d-flex justify-content-between align-items-center appointment-item">
+        <div>
+          <strong><%= appointment.content %></strong><br>
+          <small><%= appointment.time.strftime("%I:%M %p") %> with <%= appointment.stylist_Name%></small>
+        </div>
+
+        <div>
+          <% if user_signed_in? %>
+            <%= link_to "Book Now", appointment_path(appointment), class: "btn btn-sm custom-btn" %>
+          <% else %>
+            <%= link_to "Login to Book", new_user_session_path, class: "btn btn-sm custom-btn" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-center text-mited mt-4">There are no seats available for the next 4 hours.</p>
+<% end %>
+</div>
