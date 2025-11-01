@@ -48,7 +48,13 @@ gem "bootstrap", "~> 5.3"
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
+gem "cloudinary"
+gem "ruby_llm", "~> 1.6.4"
+gem "kramdown"
+gem "rouge"
+gem "kramdown-parser-gfm"
 gem "sassc-rails"
+gem "image_processing", "~> 1.2"
 
 group :development, :test do
   gem "dotenv-rails"

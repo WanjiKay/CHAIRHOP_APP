@@ -1,6 +1,8 @@
+
 <div class="container">
 <%=simple_form_for [@chat, @message] do |f| %>
 <%= f.input :content, placeholder: "Hops at your service", required: true%>
-<%= f.submit class: "btn btn-primary" %>
+<%= f.input :photos, as: :file, input_html: { multiple:true } %>
+<%= f.button :submit, 'Ask HOPPS', class: "btn btn-primary" %>
 <% end %>
 </div>

@@ -1,26 +1,7 @@
-<div class="text-center">
-  <h1>Chair Hop</h1>
-  <p>Our chair is always open</p>
+<div class="container my-5" >
+  <h1 class="text-center mb-4">Upcoming Appointments</h1>
 
-<% if user_signed_in? %>
-  <p class="text-mited">Welcome back, <%= current_user %>! </p>
-<% else %>
-  <p class="text-muted">Welcome! <%= link_to "Log in", new_user_session_path %> or
-  <%= link_to "Sign up", new_user_registration_path %> to book a chair. </p>
-<% end %>
-</div>
-
-<div class="search-bar my-4">
-  <%= form_with url: appointments_path, method: :get, local: true, class: "d-flex justify-content-center" do |form| %>
-    <%= form.text_field :search, placeholder: "Open Chair", class: "form-controle w-50 me-2" %>
-    <%= form.submit "Search", class: "btn custom-btn" %>
-  <% end %>
-</div>
-
-<hr>
-
-<h2 class="text-center mb-3 section-title">Available Appointments</h2>
-
+  <hr>
 
 <% if @upcoming_appointments.any? %>
   <div class="list-group">
