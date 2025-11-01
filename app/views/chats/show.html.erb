@@ -1,2 +1,22 @@
+<%= link_to "← Back", chats_path %> /
+<%= link_to "Appointment", appointment_path(@chat.appointment) %>
 
+<h1><%= @chat.title %></h1>
+
+<div class= "chat-messages">
+  <% @chat.messages.each do |message| %>
+    <p>
+      <strong><%= message.role %></strong>
+      <%= message.content %>
+    </p>
+
+    <% if message.photos.attached? %>
+      <% message.photos.each do |photo| %>
+      <p>
+        <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+      </p>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
 <%= render"messages/new", chat: @chat, message:@message %>
