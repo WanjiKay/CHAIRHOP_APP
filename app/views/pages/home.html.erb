@@ -12,7 +12,7 @@
 
 <div class="search-bar my-4">
   <%= form_with url: appointments_path, method: :get, local: true, class: "d-flex justify-content-center" do |form| %>
-    <%= form.text_field :search, placeholder: "Search for a stylist, time, or location", class: "form-controle w-50 me-2" %>
+    <%= form.text_field :search, placeholder: "Open Chair", class: "form-controle w-50 me-2" %>
     <%= form.submit "Search", class: "btn custom-btn" %>
   <% end %>
 </div>
