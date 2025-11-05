@@ -5,7 +5,7 @@ class Message < ApplicationRecord
 
 
   validates :content, length: { minimum: 10, maximum: 1000 }, if: -> { role == "user" }
-  # validate :file_size_validation
+  validate :file_size_validation
 
   MAX_FILE_SIZE_MB = 10
 
@@ -13,7 +13,7 @@ class Message < ApplicationRecord
 
   def file_size_validation
     photos.each do |photo|
-      if photo.attached? && photo.byte_size > MAX_FILE_SIZE_MB.megabytes
+      if photo.byte_size > MAX_FILE_SIZE_MB.megabytes
         errors.add(:photos, "size must be less than #{MAX_FILE_SIZE_MB}MB")
       end
     end
