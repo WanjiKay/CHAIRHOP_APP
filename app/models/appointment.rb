@@ -1,6 +1,6 @@
 class Appointment < ApplicationRecord
   belongs_to :user, optional: true
-
+  has_many :chats, dependent: :destroy
   validate :user_cannot_book_multiple, on: :update
 
   validates :time, presence: true
