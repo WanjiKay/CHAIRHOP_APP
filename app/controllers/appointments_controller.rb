@@ -5,8 +5,11 @@ class AppointmentsController < ApplicationController
   def index
     @available_appointments = Appointment.where(booked: false)
     @my_appointments = current_user.appointments
+    @appointments = Appointment.all
+          respond_to do |format|
+            format.html { render :index }
+          end
   end
-
 
   def book
     if @appointment.booked?
