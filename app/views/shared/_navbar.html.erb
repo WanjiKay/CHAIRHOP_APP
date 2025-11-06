@@ -38,12 +38,13 @@
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
             <%= link_to "Profile", edit_user_registration_path, class: "dropdown-item" %>
             <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" %>
+            <%= link_to "Chats", chats_path, class: "dropdown-item" %>
             <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
           </div>
         </div>
       <% else %>
         <div class="header-actions-action header-actions-action--cta" data-animation-role="header-element">
-          <%= link_to "Login", new_user_session_path, class: "btn btn--border theme-btn--primary-inverse" %>
+          <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light ms-3" %>
         </div>
       <% end %>
 
