@@ -2,7 +2,7 @@
 
 <p>
   <strong>Stylist:</strong>
-  <%= @appointment.stylist.name %>
+  <%= @appointment.stylist_Name %>
 </p>
 
 <p>
@@ -12,8 +12,8 @@
 
 <p>
   <strong>Salon:</strong>
-  <%= @appointment.salon.name %>
+  <%= @appointment.location %>
 </p>
 
-<%= link_to 'Edit', edit_appointment_path(@appointment) %> |
 <%= link_to 'Back', appointments_path %>
+<%= link_to "Ask HOPPS for help", new_chat_path(@appointment, appointment_id: @appointment.id), class: "btn btn-primary" %>
