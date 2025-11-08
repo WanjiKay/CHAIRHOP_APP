@@ -1,0 +1,73 @@
+<div class="container py-5">
+  <div class="form-container">
+
+    <header role="banner" class="app-header container profile-header">
+
+      <h1 class="section-title" style="margin-bottom: 0.5rem; text-transform: none; letter-spacing: normal;">ChairHop Profile</h1>
+
+      <% if !@editing %>
+        <%= link_to "Manage my profile", profile_path(edit: 1), class: "custom-btn header-action-btn" %>
+      <% end %>
+    </header>
+
+    <% if !@editing %>
+
+      <article class="profile-view-card">
+        <% view_row_style = "display:grid; grid-template-columns: 200px 1fr; column-gap:1rem; row-gap:1rem; align-items:center;" %>
+        <div class="profile__row" style="<%= view_row_style %>"><div class="profile__label">Name</div><div class="profile__value"><%= @user.name.presence || content_tag(:span, "Not set", class: "muted") %></div></div>
+        <div class="profile__row" style="<%= view_row_style %>"><div class="profile__label">Location</div><div class="profile__value"><%= @user.location.presence || content_tag(:span, "Not set", class: "muted") %></div></div>
+        <div class="profile__row" style="<%= view_row_style %>"><div class="profile__label">Username</div><div class="profile__value"><%= @user.username.presence || content_tag(:span, "Not set", class: "muted") %></div></div>
+        <div class="profile__row" style="<%= view_row_style %>"><div class="profile__label">Password</div><div class="profile__value">••••••••</div></div>
+        <div class="profile__row" style="<%= view_row_style %>"><div class="profile__label">About you</div><div class="profile__value"><%= @user.about.presence || content_tag(:span, "Tell others a bit about yourself.", class: "muted") %></div></div>
+      </article>
+
+    <% else %>
+
+      <article class="profile-edit-form">
+        <%= form_with model: @user, url: profile_path, method: :patch do |f| %>
+          <p class="muted" id="profile-help" style="margin-bottom: 2rem;">Fields marked with * are required.</p>
+
+          <div class="form-group">
+            <%= f.label :name, "Name*" %>
+            <%= f.text_field :name, class: "form-control", placeholder: "Jane Doe", required: true %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :location, "Location" %>
+            <%= f.text_field :location, class: "form-control", placeholder: "City, Country" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :username, "Username*" %>
+            <%= f.text_field :username, class: "form-control", placeholder: "janedoe", required: true %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password, "Password*" %>
+            <%= f.password_field :password, class: "form-control", placeholder: "••••••••", autocomplete: "new-password" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :password_confirmation, "Confirm password" %>
+            <%= f.password_field :password_confirmation, class: "form-control", placeholder: "••••••••", autocomplete: "new-password" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :about, "About you" %>
+            <%= f.text_area :about, class: "form-control", rows: 5, placeholder: "A short bio..." %>
+          </div>
+
+          <div class="profile__edit-actions" style="display:flex; gap:0.5rem; margin-top: 2rem;">
+
+            <%= f.submit "Save Changes", class: "custom-btn" %>
+
+            <%= link_to "Cancel", profile_path, class: "custom-btn custom-btn--ghost" %>
+
+            <%= link_to "Done Editing", profile_path, class: "custom-btn custom-btn--small-secondary ml-3" %>
+          </div>
+        <% end %>
+      </article>
+
+    <% end %>
+  </div>
+</div>

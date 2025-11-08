@@ -29,6 +29,17 @@ Appointment.create!(
   user: user
 )
 
+Appointment.create!(
+  time: Time.current + 4.hours,
+  location: "Salon Elegance",
+  stylist_Name: "Sizzle",
+  booked: false,
+  content: "kids cut",
+  user: user
+)
+
+
+
 # Find or create a default system user who will own the dummy appointment
 general_user = User.first || User.create!(
   email: "general@system.com",
