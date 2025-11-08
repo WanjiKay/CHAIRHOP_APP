@@ -3,7 +3,7 @@
   <p>Our chair is always open</p>
 
 <% if user_signed_in? %>
-  <p class="text-mited">Welcome back, <%= current_user %>! </p>
+  <p class="text-mited">Welcome back, <%= current_user.email.split('@').first%>! </p>
 <% else %>
   <p class="text-muted">Welcome! <%= link_to "Log in", new_user_session_path %> or
   <%= link_to "Sign up", new_user_registration_path %> to book a chair. </p>
