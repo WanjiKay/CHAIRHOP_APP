@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid header-display-desktop" data-content-field="site-title">
 
-    <!-- Left: Logo / Site title -->
+    <!-- Logo / Site title -->
     <div class="header-title-nav-wrapper">
       <div class="header-title" data-animation-role="header-element">
         <div class="header-title-text">
@@ -10,23 +10,27 @@
           <% end %>
         </div>
       </div>
-    </div>
 
-    <!-- Middle: (optional) navigation links -->
-    <div class="header-nav">
-      <div class="header-nav-wrapper">
-        <nav class="header-nav-list">
-          <!-- add your nav items here if needed -->
-          <div class="header-nav-item header-nav-item--collection"></div>
-          <div class="header-nav-item header-nav-item--collection"></div>
-        </nav>
+      <!-- Navigation links -->
+      <div class="header-nav">
+        <div class="header-nav-wrapper">
+          <nav class="header-nav-list">
+            <div class="header-nav-item header-nav-item--collection">
+
+            <div class="header-nav-item header-nav-item--collection">
+
+            </div>
+            <div class="header-nav-item header-nav-item--collection">
+
+            </div>
+          </nav>
+        </div>
       </div>
     </div>
 
-    <!-- Right: actions -->
+    <!-- Right-side actions -->
     <div class="header-actions header-actions--right">
-      <% if defined?(user_signed_in?) && user_signed_in? %>
-        <!-- Signed-in UI -->
+      <% if user_signed_in? %>
         <div class="dropdown header-actions-action">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <% if defined?(current_user) && current_user && current_user.respond_to?(:avatar) && current_user.avatar&.attached? %>
@@ -49,7 +53,6 @@
           </div>
         </div>
       <% else %>
-        <!-- Guest UI -->
         <div class="header-actions-action header-actions-action--cta" data-animation-role="header-element">
           <%= link_to "My Profile", (defined?(profile_path) ? profile_path : root_path), class: "button button--ghost" %>
           <% if defined?(new_user_session_path) %>
@@ -57,11 +60,14 @@
           <% end %>
         </div>
       <% end %>
+
+      <div class="header-actions-action header-actions-action--cta" data-animation-role="header-element">
+      </div>
     </div>
+
 
   </div>
 </nav>
-
 <style>
   .navbar-logo { height: 40px; width: auto; }
 </style>

@@ -1,29 +1,9 @@
-<%# <%= link_to "← Back", chats_path %> /
-<%# <%= link_to "Appointment", appointment_path(@chat.appointment) %>
 
-<%# <h1><%= @chat.title %>
-
-<%# <div class= "chat-messages">
-  <% @chat.messages.each do |message| %>
-    <%# <p>
-      <strong><%= message.role %>
-      <%# <%= message.content %>
-    <%# </p>
-
-    <% if message.photos.attached? %>
-      <%# <% message.photos.each do |photo| %>
-      <%# <p>
-        <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-      <%# </p>
-      <% end %>
-    <%# <% end %>
-  <%# <% end %>
-<%# </div>
-<%= render"messages/new", chat: @chat, message:@message %> %> %> %> %> %> %> %> %> %> %> %> %> %>
 
 <%= turbo_stream_from @chat %>
-<%= link_to "← Back", chats_path %> /
-<%= link_to "Appointment", appointment_path(@chat.appointment) %>
+<%= link_to "← Back to Chats", chats_path %> /
+<%= link_to "Back to Appointment", appointment_path(@chat.appointment) %>
+<%= link_to "← Back to Appointment's chats", appointment_chats_path(@chat.appointment) %>
 
 <% if Rails.env.development? %>
   <span class="float-end">
