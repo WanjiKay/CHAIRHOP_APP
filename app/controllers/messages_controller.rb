@@ -54,7 +54,7 @@ class MessagesController < ApplicationController
 
   def appointment_context
     appointment = @chat.appointment
-    "Here is the context of the appointment: #{appointment.content}, #{appointment.time}, #{appointment.location}."
+    "Here is the context of the appointment: #{appointment.content}, #{appointment.time}, the location is: #{appointment.location}, the stylist's name is: #{appointment.stylist_Name}."
   end
 
   def instructions

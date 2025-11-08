@@ -4,6 +4,7 @@
       <div class="bg-blue rounded p-3 shadow">
         <%= simple_form_for [@chat] do |f| %>
           <%= f.input :title, placeholder: "How can I help?", required: true, label:false %>
+          <%= f.hidden_field :appointment_id, value: @appointment.id if @appointment.present? %>
           <%= f.submit class: "btn btn-flat" %>
         <% end %>
       </div>

@@ -28,3 +28,22 @@ Appointment.create!(
   content: "Mama said the works, darling! (wash, cut, colour, style, and face)",
   user: user
 )
+
+# Find or create a default system user who will own the dummy appointment
+general_user = User.first || User.create!(
+  email: "general@system.com",
+  password: "password123",
+  name: "System Bot"
+)
+
+# Find or create the dummy appointment used for general (non-booked) chats
+Appointment.find_or_create_by!(
+  time: Time.current,
+  location: "Virtual",
+  booked: false,
+  content: "This appointment is used for general chats without a specific booking.",
+  user_id: general_user.id,
+  stylist_Name: "General Chat"
+)
+
+puts ":white_check_mark: Dummy appointment 'General Chat' created successfully."

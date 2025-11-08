@@ -13,8 +13,10 @@
 <p>
   <strong>Time:</strong>
   <%= @appointment.time %>
+  <strong>Salon:</strong>
+  <%= @appointment.location %>
 </p>
 
-<%= link_to 'Edit', edit_appointment_path(@appointment) %> |
 <%= link_to 'Back', appointments_path %>
 <%= link_to "Go to chats", appointment_chats_path(@appointment), class: "btn btn-primary" %>
+<%= link_to "Ask HOPPS for help", new_chat_path(@appointment, appointment_id: @appointment.id), class: "btn btn-primary" %>
