@@ -1,22 +1,25 @@
+# config/routes.rb
 Rails.application.routes.draw do
-  devise_for :users
-  root to: "pages#home"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Root
+  root "pages#home"
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_checkgit
+  # Health
+  get "up" => "rails/health#show", as: :rails_health_check
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # --------- ADD PROFILE HERE ----------
+  # GET /profile  -> profiles#show
+  # PATCH /profile -> profiles#update
+  resource :profile, only: [:show, :update]
+  get "/profile", to: "profiles#show" # redundant but harmless; ensures GET route
+  # -------------------------------------
+
+  # Existing routes from your app (based on your routes dump)
   resources :appointments do
-    resources :chats, only: [:index, :show, :new, :create]
-    member do
-      post :book
-    end
-end
+    member { post :book }
+    resources :chats, only: [:index, :new, :create, :show]
+  end
 
-resources :chats, only: [:index, :show, :new, :create] do
-  resources :messages, only: [:index, :create]
+  resources :chats, only: [:index, :new, :create, :show] do
+    resources :messages, only: [:index, :create]
   end
 end
