@@ -16,9 +16,15 @@ class ChatsController < ApplicationController
   end
 
   def create
+    appointment_id = params.dig(:chat, :appointment_id) || params[:appointment_id]
+    if appointment_id.present?
+      @appointment = Appointment.find(appointment_id)
+    else
+      @appointment = Appointment.find_by(stylist_Name: "General Chat")
+    end
     @chat = Chat.new(chat_params)
     @chat.user = current_user
-    @chat.appointment = Appointment.first
+    @chat.appointment = @appointment
     if @chat.save
       redirect_to @chat
     else
@@ -29,6 +35,11 @@ class ChatsController < ApplicationController
 
   def new
     @chat = Chat.new
+    if params[:appointment_id].present?
+      @appointment = Appointment.find(params[:appointment_id])
+    else
+      @appointment = nil
+    end
   end
 
   private

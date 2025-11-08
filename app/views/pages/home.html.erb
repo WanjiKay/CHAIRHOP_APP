@@ -21,7 +21,7 @@
 
 <h2 class="text-center mb-3 section-title">Available Appointments</h2>
 
-
+<%= link_to "Any questions? HOPPS can help you", chats_path %>
 <% if @upcoming_appointments.any? %>
   <div class="list-group">
     <% @upcoming_appointments.each do |appointment| %>
