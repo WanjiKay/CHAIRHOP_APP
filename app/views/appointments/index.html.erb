@@ -14,7 +14,7 @@
 
         <div>
           <% if user_signed_in? %>
-            <%= link_to "Book Now", appointment_path(appointment), class: "btn btn-sm custom-btn" %>
+            <%= link_to "View Booking", appointment_path(appointment), class: "btn btn-sm custom-btn" %>
           <% else %>
             <%= link_to "Login to Book", new_user_session_path, class: "btn btn-sm custom-btn" %>
           <% end %>

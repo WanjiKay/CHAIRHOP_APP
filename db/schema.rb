@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_10_30_234308) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_08_183543) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_30_234308) do
     t.bigint "appointment_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "model_id"
     t.index ["appointment_id"], name: "index_chats_on_appointment_id"
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
@@ -70,7 +71,29 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_30_234308) do
     t.bigint "chat_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "input_tokens"
+    t.integer "output_tokens"
+    t.string "model_id"
     t.index ["chat_id"], name: "index_messages_on_chat_id"
+  end
+
+  create_table "solid_cable_messages", force: :cascade do |t|
+    t.text "channel"
+    t.text "payload"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel"], name: "index_solid_cable_messages_on_channel"
+    t.index ["created_at"], name: "index_solid_cable_messages_on_created_at"
+  end
+
+  create_table "tool_calls", force: :cascade do |t|
+    t.bigint "message_id", null: false
+    t.string "tool_call_id"
+    t.string "name"
+    t.jsonb "arguments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_tool_calls_on_message_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -91,4 +114,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_10_30_234308) do
   add_foreign_key "chats", "appointments"
   add_foreign_key "chats", "users"
   add_foreign_key "messages", "chats"
+  add_foreign_key "tool_calls", "messages"
 end

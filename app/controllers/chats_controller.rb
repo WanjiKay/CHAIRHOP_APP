@@ -2,7 +2,12 @@ class ChatsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @chats = current_user.chats
+     if params[:appointment_id].present?
+      @appointment = Appointment.find(params[:appointment_id])
+      @chats = current_user.chats.where(appointment: @appointment)
+    else
+      @chats = current_user.chats.where(appointment: nil)
+    end
   end
 
   def show
