@@ -67,3 +67,39 @@ label{
   transform: translateY(0);
   }
 }
+
+.profile-header{
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  border-bottom: 1px solid $color-soft-gray;
+  padding-bottom: 1rem;
+}
+
+.header-action-btn{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.profile-view-card{
+  padding: 3rem;
+  background: $color-cream;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgb(0, 0, 0.05);
+  border: 1px solid rgba($color-soft-gray, 0.6);
+}
+
+.custom-btn--ghost{
+  background: transparent;
+  color: $primary;
+  border: 1px solid $primary;
+  box-shadow: none;
+
+  &:hover,
+  &:focus{
+    background: $primary;
+    color: #fff;
+    box-shadow: 0 0 0 3px rgba($primary, 0.3);
+  }
+}
