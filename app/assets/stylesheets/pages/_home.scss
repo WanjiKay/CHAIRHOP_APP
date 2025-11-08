@@ -177,12 +177,13 @@
     border: 1px solid rgba($color-soft-gray, 0.5);
     border-radius: 16px;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
-    transition: transform all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+
 
     &:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-      background: linear-gradient(145deg, $color-cream, lighten($color-cream, 5%));
+      transform: none;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
+      background: linear-gradient(145deg, lighten($color-muted-olive, 10%), $color-muted-olive);
     }
 
     strong {
@@ -194,8 +195,36 @@
       color: darken($color-muted-olive, 15%);
       font-weight: 600;
     }
+
+
+    .custom-btn {
+      background: $primary;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      min-width: 130px;
+      text-align: center;
+      transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+      transform: translateY(0);
+
+      &:hover,
+      &:focus {
+        background: darken($primary, 10%);
+        box-shadow: 0 0 0 3px rgba($primary, 0.3);
+        transform: translateY(-3px);
+      }
+
+      &:active{
+        transform: translateY(0);
+      }
+    }
   }
 }
+
 
 // Adjusted Response
 @media (max-width: 992px) {
