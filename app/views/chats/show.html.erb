@@ -3,7 +3,7 @@
 <%= turbo_stream_from @chat %>
 <%= link_to "← Back to Chats", chats_path %> /
 <%= link_to "Back to Appointment", appointment_path(@chat.appointment) %>
-<%= link_to "← Back to Appointment's chats", appointment_chats_path(@chat.appointment) %>
+<%# <%= link_to "← Back to Appointment's chats", appointment_chats_path(@chat.appointment) %> %>
 
 <% if Rails.env.development? %>
   <span class="float-end">
