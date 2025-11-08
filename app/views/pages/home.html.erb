@@ -2,12 +2,32 @@
   <h1>Chair Hop</h1>
   <p>Our chair is always open</p>
 
-<% if user_signed_in? %>
-  <p class="text-mited">Welcome back, <%= current_user.email.split('@').first%>! </p>
-<% else %>
-  <p class="text-muted">Welcome! <%= link_to "Log in", new_user_session_path %> or
-  <%= link_to "Sign up", new_user_registration_path %> to book a chair. </p>
-<% end %>
+  <% signed_in = (defined?(user_signed_in?) && user_signed_in?) %>
+
+  <% if signed_in %>
+    <p class="text-muted">
+      Welcome back,
+      <%= (defined?(current_user) && current_user && current_user.respond_to?(:first_name)) ? current_user.first_name : "friend" %>!
+    </p>
+  <% else %>
+    <p class="text-muted">
+      Welcome!
+      <% if defined?(new_user_session_path) %>
+        <%= link_to "Log in", new_user_session_path %>
+      <% end %>
+      <% if defined?(new_user_registration_path) %>
+        <% if defined?(new_user_session_path) %> or <% end %>
+        <%= link_to "Sign up", new_user_registration_path %>
+      <% end %>
+      <% unless defined?(new_user_session_path) || defined?(new_user_registration_path) %>
+        <!-- Devise not present: hide auth links -->
+      <% end %>
+      to book a chair.
+    </p>
+    <p class="text-muted">
+      <%= link_to "My Profile", (defined?(profile_path) ? profile_path : root_path), class: "button button--ghost" %>
+    </p>
+  <% end %>
 </div>
 
 <div class="search-bar my-4">
@@ -21,27 +41,25 @@
 
 <h2 class="text-center mb-3 section-title">Available Appointments</h2>
 
-<%= link_to "Any questions? HOPPS can help you", chats_path %>
 <% if @upcoming_appointments.any? %>
   <div class="list-group">
     <% @upcoming_appointments.each do |appointment| %>
       <div class="list-group-item d-flex justify-content-between align-items-center appointment-item">
         <div>
           <strong><%= appointment.content %></strong><br>
-          <small><%= appointment.time.strftime("%I:%M %p") %> with <%= appointment.stylist_Name%></small>
+          <small><%= appointment.time.strftime("%I:%M %p") %> with <%= appointment.stylist_Name %></small>
         </div>
 
         <div>
-          <% if user_signed_in? %>
+          <% if signed_in %>
             <%= link_to "Book Now", appointment_path(appointment), class: "btn btn-sm custom-btn" %>
           <% else %>
-            <%= link_to "Login to Book", new_user_session_path, class: "btn btn-sm custom-btn" %>
+            <%= link_to "Login to Book", (defined?(new_user_session_path) ? new_user_session_path : profile_path), class: "btn btn-sm custom-btn" %>
           <% end %>
         </div>
       </div>
     <% end %>
   </div>
 <% else %>
-  <p class="text-center text-mited mt-4">There are no seats available for the next 4 hours.</p>
+  <p class="text-center text-muted mt-4">There are no seats available for the next 4 hours.</p>
 <% end %>
-</div>
