@@ -29,14 +29,10 @@
         <!-- Signed-in UI -->
         <div class="dropdown header-actions-action">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <% if defined?(current_user) && current_user %>
-              <%= image_tag(
-                    (current_user.respond_to?(:avatar) && current_user.avatar&.attached?) ? url_for(current_user.avatar) : "https://kitt.lewagon.com/placeholder/users/#{current_user.id}",
-                    class: "avatar",
-                    alt: "User menu"
-                  ) %>
+            <% if defined?(current_user) && current_user && current_user.respond_to?(:avatar) && current_user.avatar&.attached? %>
+              <%= image_tag url_for(current_user.avatar), class: "avatar", alt: "User menu" %>
             <% else %>
-              <span class="avatar">👤</span>
+              <%= image_tag "profile.png", class: "avatar", alt: "User menu" %>
             <% end %>
           </a>
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -44,30 +40,22 @@
               <%= link_to "Profile", edit_user_registration_path, class: "dropdown-item" %>
               <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" %>
             <% end %>
+            <% if defined?(chats_path) %>
+              <%= link_to "Chats", chats_path, class: "dropdown-item" %>
+            <% end %>
             <% if defined?(destroy_user_session_path) %>
               <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
             <% end %>
-           <%#= image_tag(current_user.avatar.attached? ? url_for(current_user.avatar) : "https://kitt.lewagon.com/placeholder/users/#{current_user.email.split('@').first}", class: "avatar", alt: "User menu") %>
-           <%= image_tag 'profile.png', class: "avatar", alt: "dropdown menu" %>
-          </a>
-          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <%= link_to "Profile", edit_user_registration_path, class: "dropdown-item" %>
-            <%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" %>
-            <%= link_to "Chats", chats_path, class: "dropdown-item" %>
-            <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
           </div>
         </div>
       <% else %>
         <!-- Guest UI -->
         <div class="header-actions-action header-actions-action--cta" data-animation-role="header-element">
           <%= link_to "My Profile", (defined?(profile_path) ? profile_path : root_path), class: "button button--ghost" %>
-          <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light ms-3" %>
+          <% if defined?(new_user_session_path) %>
+            <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light ms-3" %>
+          <% end %>
         </div>
-        <% if defined?(new_user_session_path) %>
-          <div class="header-actions-action header-actions-action--cta" data-animation-role="header-element">
-            <%= link_to "Login", new_user_session_path, class: "btn btn--border theme-btn--primary-inverse" %>
-          </div>
-        <% end %>
       <% end %>
     </div>
 
@@ -77,5 +65,3 @@
 <style>
   .navbar-logo { height: 40px; width: auto; }
 </style>
-
-<% console %>
