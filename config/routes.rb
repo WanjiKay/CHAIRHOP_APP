@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   # Root
   root "pages#home"
 
+  devise_for :users
+
   # Health
   get "up" => "rails/health#show", as: :rails_health_check
 
