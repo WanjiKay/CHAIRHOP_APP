@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Profile
-  resource :profile, only: [:show, :update]
+  resource :profile, only: [:show, :edit, :update]
   get "/profile", to: "profiles#show" # explicit GET, harmless redundancy
 
   # Appointments (no block)
